@@ -1,0 +1,139 @@
+Sub final()
+
+'loop thru the Sheets
+For Each ws In Worksheets
+Dim WorksheetName As String
+WorksheetName = ws.Name
+MsgBox WorksheetName
+
+'Declaring Variables
+
+Dim yr_ch As Double
+Dim r As LongPtr
+Dim k As LongPtr
+Dim c As Long
+Dim Tot_Vol As LongPtr
+Dim LastRow As Long
+Dim per As Long
+Dim f As Integer
+Dim Max As LongPtr
+Dim Min As LongPtr
+Dim Max_Vol As LongPtr
+Dim ticker_inc As String
+Dim ticker_dec As String
+Dim ticker_vol As String
+Dim p As Long
+
+'summary table headings
+ws.Cells(1, 8).Value = "Ticker"
+ws.Cells(1, 9).Value = "Year_Change"
+ws.Cells(1, 10).Value = "percent"
+ws.Cells(1, 11).Value = "TotalVol"
+
+'find lastrow in the working sheet
+LastRow = ws.Cells(Rows.Count, 1).End(xlUp).Row
+
+'Initializing Variables for percentage table
+Max_Vol = 0
+Min = 0
+Max = 0
+ticker_inc = ""
+ticker_dec = ""
+ticker_vol = ""
+
+
+c = 2
+k = 2
+
+'calculating Total Volume
+For r = 2 To LastRow
+
+If ws.Cells(r, 1).Value = ws.Cells(r + 1, 1).Value Then
+    Tot_Vol = Tot_Vol + ws.Cells(r, 7).Value
+   
+End If
+
+'Calculation of yearly Change and Percentage Change
+If ws.Cells(r, 1).Value <> ws.Cells(r + 1, 1) And ws.Cells(k, 3).Value <> 0 Then
+    Tot_Vol = Tot_Vol + ws.Cells(r, 7).Value
+    
+    yr_ch = ws.Cells(r, 6).Value - ws.Cells(k, 3).Value
+   
+    per = (yr_ch / ws.Cells(k, 3).Value) * 100
+
+    ws.Cells(c, 8).Value = ws.Cells(r, 1).Value
+    ws.Cells(c, 9).Value = yr_ch
+    ws.Cells(c, 10).Value = per
+    ws.Cells(c, 11).Value = Tot_Vol
+    
+    k = r + 1
+
+c = c + 1
+Tot_Vol = 0
+
+
+
+End If
+
+Next r
+
+
+
+For p = 2 To (c - 1)
+
+
+'conditional formatting
+
+If ws.Cells(p, 9).Value >= 0 Then
+ws.Cells(p, 9).Interior.ColorIndex = 4
+End If
+If ws.Cells(p, 9).Value < 0 Then
+ ws.Cells(p, 9).Interior.ColorIndex = 3
+End If
+
+
+'Conditional Max and MIn Percent changes Values
+ If ws.Cells(p, 10).Value > Max Then
+     Max = ws.Cells(p, 10).Value
+      ticker_inc = ws.Cells(p, 8).Value
+      End If
+   
+If ws.Cells(p, 10).Value < Min Then
+      Min = ws.Cells(p, 10).Value
+       ticker_dec = ws.Cells(p, 8).Value
+       End If
+       
+       
+'conditional for Max Vol
+    If ws.Cells(p, 11).Value > Max_Vol Then
+    Max_Vol = ws.Cells(p, 11).Value
+    ticker_vol = ws.Cells(p, 8).Value
+    End If
+
+
+
+    Next p
+
+' Printing the max, min and Max_Vol table
+
+ws.Cells(2, 14).Value = "Greatest % Increase"
+ws.Cells(3, 14).Value = "Greatest % decrease"
+ws.Cells(4, 14).Value = "Greatest Total Volume"
+ws.Cells(1, 15).Value = "Ticker"
+ws.Cells(1, 16).Value = "Value"
+
+
+ws.Cells(2, 15).Value = ticker_inc
+ws.Cells(3, 15).Value = ticker_dec
+ws.Cells(4, 15).Value = ticker_vol
+ws.Cells(2, 16).Value = Max
+ws.Cells(3, 16).Value = Min
+ws.Cells(4, 16).Value = Max_Vol
+
+
+MsgBox (ticker_inc)
+
+
+ Next ws
+
+End Sub
