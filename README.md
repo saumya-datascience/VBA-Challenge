@@ -45,5 +45,5 @@ As part of Rutgers Bootcamp VBA Challenge I was provided with an excels sheet co
 ![2014](Images/Screenshot 2014.png)
 
 * Made appropriate adjustments to  VBA script that will allow it to run on every worksheet, i.e., every year, just by running the VBA script once.
-![the final VBS]()
+![the final VBS](stock_macro.vbs.txt)
 
