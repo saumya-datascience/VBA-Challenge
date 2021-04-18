@@ -39,8 +39,7 @@ As part of Rutgers Bootcamp VBA Challenge I was provided with an excels sheet co
 ## Masters always go for BONUS!!!!
 
 * My solution was also able to return the stock with the "Greatest % increase", "Greatest % decrease" and "Greatest total volume". The solution looked as follows:
-
-![yr_2016](Images/Screenshot 2016.png)
+(Images/Screenshot 2016.png)
 
 !yr_2015](Images/Screenshot 2015.png)
 
