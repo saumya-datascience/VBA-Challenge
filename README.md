@@ -16,7 +16,7 @@ As part of Rutgers Bootcamp VBA Challenge I was provided with an excels sheet co
 
 ### Stock market analyst
 
-![stock Market](Images/stockmarket.jpg)
+![stock Market](Images/stock.jfif)
 
 ## Lets Get Started
 
